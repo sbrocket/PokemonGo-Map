@@ -67,6 +67,10 @@ if __name__ == '__main__':
     config['LOCALE'] = args.locale
     config['CHINA'] = args.china
 
+    config['BASIC_AUTH_ENABLE'] = args.auth_enable
+    config['BASIC_AUTH_USERNAME'] = args.auth_username
+    config['BASIC_AUTH_PASSWORD'] = args.auth_password
+
     if not args.only_server:
         # Gather the pokemons!
         if not args.mock:
