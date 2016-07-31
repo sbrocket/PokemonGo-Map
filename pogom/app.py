@@ -7,6 +7,7 @@ import logging
 from flask import Flask, jsonify, render_template, request
 from flask.json import JSONEncoder
 from flask_compress import Compress
+from flask_basicauth import BasicAuth
 from datetime import datetime
 from s2sphere import *
 from pogom.utils import get_args
@@ -28,6 +29,12 @@ class Pogom(Flask):
         self.route("/loc", methods=['GET'])(self.loc)
         self.route("/next_loc", methods=['POST'])(self.next_loc)
         self.route("/mobile", methods=['GET'])(self.list_pokemon)
+        if config['BASIC_AUTH_ENABLE']:
+          log.info("Enabling HTTP basic authentication")
+          self.config['BASIC_AUTH_USERNAME'] = config['BASIC_AUTH_USERNAME']
+          self.config['BASIC_AUTH_PASSWORD'] = config['BASIC_AUTH_PASSWORD']
+          self.config['BASIC_AUTH_FORCE'] = True
+          self.basic_auth = BasicAuth(self)
 
     def fullmap(self):
         args = get_args()

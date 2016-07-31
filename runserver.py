@@ -74,6 +74,10 @@ if __name__ == '__main__':
     config['LOCALE'] = args.locale
     config['CHINA'] = args.china
 
+    config['BASIC_AUTH_ENABLE'] = args.auth_enable
+    config['BASIC_AUTH_USERNAME'] = args.auth_username
+    config['BASIC_AUTH_PASSWORD'] = args.auth_password
+
     app = Pogom(__name__)
     db = init_database(app)
     if args.clear_db:
